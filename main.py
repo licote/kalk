@@ -1,5 +1,33 @@
 from Debt import Debt
-a = Debt(50000, 60,7.2)
-a.addOverpayment(25,5000)
-a.fixedRate()
 
+print("Podaj dane kredytu: \nwartość, miesiące, opr. roczne(%), prowizja(%) \n(oddzielone spacją, cz.dziesiętne oddzielane kropką)")
+p,m,ir,c = input().split()
+d = Debt(float(p),int(m),float(ir),float(c))
+
+r = input("Raty: 1. stałe 2. malejące \n")
+if(int(r) == 1):
+  while(1):
+    try:
+      m, v = input("Dodaj nadpłatę(miesiąc, wartość) (Oddzielone spacją, Enter by kontynuować)").split()
+    except ValueError:
+      break
+    else:
+      d.addOverpayment(int(m), float(v))
+  while(1):
+    try:
+      m, v = input("Dodaj zmianę oprocentowania(miesiąc, procent) (Oddzielone spacją, Enter by kontynuować)")
+    except ValueError:
+      break
+    else:
+      d.addInterestChange(m,v)
+  d.fixedRate()
+if(int(r) == 2):
+  while(1):
+    try:
+      m, v = input("Dodaj nadpłatę(miesiąc, wartość) (Oddzielone spacją, Enter by kontynuować)").split()
+    except ValueError:
+      break
+    else:
+      d.addOverpayment(int(m), float(v))
+  d.variableRate()
+  
