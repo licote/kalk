@@ -15,11 +15,11 @@ if(int(r) == 1):
       d.addOverpayment(int(m), float(v))
   while(1):
     try:
-      m, v = input("Dodaj zmianę oprocentowania(miesiąc, procent) (Oddzielone spacją, Enter by kontynuować)")
+      m, v = input("Dodaj zmianę oprocentowania(miesiąc, procent) (Oddzielone spacją, Enter by kontynuować)").split()
     except ValueError:
       break
     else:
-      d.addInterestChange(m,v)
+      d.addInterestChange(int(m),float(v))
   d.fixedRate()
 if(int(r) == 2):
   while(1):

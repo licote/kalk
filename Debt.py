@@ -1,5 +1,5 @@
 class Debt:
-  def __init__(self, principal, months, rate, commission):
+  def __init__(self, principal, months, rate, commission): #wartość, miesiące, oprocentowanie, prowizja
     self.principal = principal
     self.months = months
     self.rate = rate/100
