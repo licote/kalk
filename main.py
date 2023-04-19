@@ -79,5 +79,5 @@ def variableRate(principal: float, months: int, rate: float):
   return arrayOfInstallments
 
 
-variableRate(50000, 60, 0.072)
+#variableRate(50000, 60, 0.072)
 fixedRate(50000, 60, 0.072)
