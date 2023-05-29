@@ -1,3 +1,7 @@
+class en:
+    MONTH = 0
+    AMOUNT = 1
+
 class Debt:
   def __init__(self, principal, months, rate, commission): #wartość, miesiące, oprocentowanie, prowizja
     self.principal = principal
@@ -32,14 +36,14 @@ class Debt:
     print("kapit.   ods.      całk.     nr raty")
     for month in range(1, months + 1):
       for op in self.overpayments: #nadpłaty
-        if month == op[0]:
-          principal -= op[1]
+        if month == op[en.MONTH]:
+          principal -= op[en.AMOUNT]
           installment = self.calculateInstallment(principal, months + 1 - month, rate)
-          print("Nadpłata - " + str(op[1]))
+          print("Nadpłata - " + str(op[en.AMOUNT]))
       for ic in self.interestChanges: #zmiany oprocentowania
-        if month == ic[0]:
+        if month == ic[en.MONTH]:
           oldrate = rate
-          rate = ic[1]/100
+          rate = ic[en.AMOUNT]/100
           installment = self.calculateInstallment(principal, months + 1 - month, rate)  
           print("Zmiana oprocentowania  - " + str(round(oldrate,4)) + " --> " + str(rate))
       interestSide = principal * rate * 1 / 12  #cz. odsetkowa
@@ -73,11 +77,15 @@ class Debt:
     print("kapit.   ods.      całk.     nr raty")
     for month in range(1, months + 1):
       for overpayment in self.overpayments:  #nadpłaty
-        if month == overpayment[0]: 
-          principal -= overpayment[1]
+        if month == overpayment[en.MONTH]:
+          principal -= overpayment[en.AMOUNT]
           principalSide = self.calculateInstallment(principal, months + 1 - month, 0)
-          print("Nadpłata - " + str(overpayment[1]))
-      
+          print("Nadpłata - " + str(overpayment[en.AMOUNT]))
+      for ic in self.interestChanges: #zmiany oprocentowania
+        if month == ic[en.MONTH]:
+          oldrate = rate
+          rate = ic[en.AMOUNT]/100
+          print("Zmiana oprocentowania  - " + str(round(oldrate,4)) + " --> " + str(rate))
       '''
       Faster
       for overpayment in self.overpayments:
